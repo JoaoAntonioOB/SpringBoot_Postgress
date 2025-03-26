@@ -24,7 +24,5 @@ public class StartApp implements CommandLineRunner {
     public void run(String... args) throws Exception {
         clienteService.exibirMenu();
         Scanner scanner = new Scanner(System.in);
-
-
     }
 }

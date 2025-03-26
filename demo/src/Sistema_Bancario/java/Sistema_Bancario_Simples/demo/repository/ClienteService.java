@@ -2,16 +2,13 @@ package Sistema_Bancario_Simples.demo.repository;
 
 import Sistema_Bancario_Simples.demo.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 import java.util.Scanner;
 
 @Service
 public class ClienteService {
-    private ClienteRepository repository;
-    String input;
+    private final ClienteRepository repository;
 
     @Autowired
     public ClienteService(ClienteRepository repository){
@@ -50,7 +47,7 @@ public class ClienteService {
                 case "4":
                     modificarCliente(scanner); //Modificar cadastro cliente
                 case "5":
-                    excluirTabela(scanner);; //Exclui a tabela e todos os clientes
+                    excluirTabela(scanner); //Exclui a tabela e todos os clientes
             }
         }
     }
@@ -79,9 +76,6 @@ public class ClienteService {
         while(saldo == null){
             System.out.println("Digite seu saldo: ");
             saldo = scanner.nextDouble();
-            if(saldo == null){
-                System.out.println("O saldo não pode ser vazio");
-            }
         }
 
         Cliente cliente = new Cliente(nome, conta, saldo);
@@ -145,7 +139,7 @@ public class ClienteService {
         System.out.println("Saldo atual: " + cliente.getSaldo());
         System.out.println("Novo saldo (ou pressione ENTER para manter): ");
         Double novoSaldo = scanner.nextDouble();
-        if(!novoSaldo.equals(null)){
+        if(novoSaldo != null){
                 cliente.setSaldo(novoSaldo);
         }
         repository.save(cliente);
